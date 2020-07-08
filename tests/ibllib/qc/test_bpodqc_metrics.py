@@ -1,10 +1,11 @@
 # Mock dataset
 import unittest
+from pathlib import Path
 from functools import partial
 
 import numpy as np
 
-from ibllib.qc import BpodQC
+from ibllib.qc.bpodqc_metrics import BpodQC
 from ibllib.qc import bpodqc_metrics as qcmetrics
 from ibllib.qc.oneutils import download_bpodqc_raw_data
 from oneibl.one import ONE
@@ -109,11 +110,6 @@ class TestBpodQCMetrics(unittest.TestCase):
         data["goCueTrigger_times"] = data["stimOn_times"] + 1e-3
         data["goCue_times"] = data["goCueTrigger_times"] + trigg_delay
 
-        # data["goCueTrigger_times"] = data["quiescence"] + 1e-3
-        # data["goCue_times"] = data["goCueTrigger_times"] + trigg_delay
-        # data['stimOn_times'] = data['goCue_times'] + 1e-3
-        # data['stimOn_times_training'] = data['stimOn_times']
-        # data['stimOnTrigger_times'] = data['stimOn_times'] - trigg_delay
         data["response_times"] = end_times - (
             resp_feeback_delay + 1e-1 + iti_length + (~correct + 1)
         )
